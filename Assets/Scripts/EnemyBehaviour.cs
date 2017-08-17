@@ -10,6 +10,8 @@ public class EnemyBehaviour : MonoBehaviour {
     public GameObject playerShip;
     public int enemyPoints=150;
     private ScoreKeeper scorekeeper;
+    public AudioClip EnemyDeathSound;
+    public AudioClip EnemyLaserSound;
 
     private void Start()
     {
@@ -23,14 +25,21 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             health -= misil.GetDamage();
             misil.Hit();
+            
 
             if (health <= 0)
             {
-                scorekeeper.Score(enemyPoints);
-                Destroy(gameObject);
+                Die();
             }
                 
         }
+    }
+
+    private void Die()
+    {
+        scorekeeper.Score(enemyPoints);
+        AudioSource.PlayClipAtPoint(EnemyDeathSound, this.transform.position);
+        Destroy(gameObject);
     }
 
     private void Update()
@@ -47,5 +56,6 @@ public class EnemyBehaviour : MonoBehaviour {
         Vector3 startPosition = transform.position + new Vector3(0, -1, 0);
         GameObject enemy_beam = Instantiate(enemy_laser, startPosition, Quaternion.identity) as GameObject;
         enemy_beam.GetComponent<Rigidbody2D>().velocity = new Vector3(0,-enemy_laserSpeed,0f);
+        AudioSource.PlayClipAtPoint(EnemyLaserSound, transform.position);
     }
 }

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     public float laserSpeed=5f, firingRate=0.2f;
     public float health=250f;
     private ScoreKeeper scorekeeper;
+    public AudioClip PlayerLaserSound;
 
 
     private void Start()
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 startPosition = transform.position + new Vector3(0, 0.6f, 0);
         GameObject beam = Instantiate(laser, startPosition, Quaternion.identity) as GameObject;
         beam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, laserSpeed, 0);
+        AudioSource.PlayClipAtPoint(PlayerLaserSound, transform.position);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
