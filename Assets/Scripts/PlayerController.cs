@@ -76,10 +76,17 @@ public class PlayerController : MonoBehaviour {
 
             if (health <= 0)
             {
-                scorekeeper.ResetScore();
-                Destroy(gameObject);
+                Die();
+                
             }
                 
         }
+    }
+
+    void Die()
+    {
+        LevelManager mgr = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        mgr.LoadLevel("EndMenu");
+        Destroy(gameObject);
     }
 }

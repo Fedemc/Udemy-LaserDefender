@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreKeeper : MonoBehaviour {
-    public int ScorePoints;
+    public static int ScorePoints;
     private Text myText;
 
 
@@ -21,10 +21,9 @@ public class ScoreKeeper : MonoBehaviour {
         myText.text = ScorePoints.ToString();
     }
     
-    public void ResetScore()
+    public static void ResetScore()
     {
         ScorePoints = 0;
-        myText.text = ScorePoints.ToString();
     }
     
 }
